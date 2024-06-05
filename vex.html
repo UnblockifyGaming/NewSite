@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="download.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawi</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Add texture to background */
+            background-repeat: repeat;
+        }
+        header {
+            background-color: #222;
+            color: #0f0;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            background-color: #111;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+        h1, h2 {
+            margin: 0 0 20px 0;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #0f0;
+            background-color: #222;
+            color: #0f0;
+            font-size: 16px;
+        }
+        .game-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            color: #0f0;
+            border: 1px solid #0f0;
+        }
+        .game-link:hover {
+            background-color: #0b4618;
+        }
+    </style>
+    <script>
+        const games = ['Vex 3', 'Vex 4', 'Vex 5', 'Vex 6', 'Vex 7', 'Vex 8', 'Index'];
+
+        function filterGames() {
+            let input = document.getElementById('gameSearch').value.toLowerCase();
+            let links = document.getElementsByClassName('game-link');
+            for (let i = 0; i < links.length; i++) {
+                let link = links[i];
+                if (link.textContent.toLowerCase().includes(input)) {
+                    link.style.display = "";
+                } else {
+                    link.style.display = "none";
+                }
+            }
+        }
+
+        function generateGameLinks() {
+            const container = document.querySelector('.container');
+            games.forEach(game => {
+                const link = document.createElement('a');
+                const gameFile = game.toLowerCase().replace(/\s+/g, '') + '.html';
+                link.href = gameFile;
+                link.className = 'game-link';
+                link.textContent = game;
+                container.appendChild(link);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', generateGameLinks);
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Lawi</h1>
+    </header>
+    <div class="container">
+        <input type="text" id="gameSearch" class="search-bar" onkeyup="filterGames()" placeholder="Search here...">
+    </div>
+</body>
+</html>
